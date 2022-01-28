@@ -45,7 +45,7 @@ app.post("/form", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.status(200).json("Welcome :wave:");
+  res.status(200).json("Welcome 👋");
 });
 
 app.get("*", (req, res) => {
