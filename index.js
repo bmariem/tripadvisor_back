@@ -22,14 +22,13 @@ app.post("/form", async (req, res) => {
       req.fields.text
     ) {
       const data = {
-        from: `${req.fields.firstname} ${req.fields.lastname} <me@samples.mailgun.org>`,
+        from: `${req.fields.firstname} ${req.fields.lastname} ${req.fields.email}`,
         to: process.env.EMAIL,
         subject: `Mail from ${req.fields.email}`,
         text: `${req.fields.text}`,
       };
 
       await mailgun.messages().send(data, (error, body) => {
-
         if (error === undefined) {
           res.status(200).json({ message: "Email succefully sent 📤" });
         } else {
@@ -49,7 +48,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.status(400).json({ message: "route not found" });
+  res.status(404).json({ message: "Page not found 😱" });
 });
 
 app.listen(process.env.PORT, () => {
